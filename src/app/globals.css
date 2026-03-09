@@ -1,0 +1,292 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   CSS VARIABLES — Dark Premium Health-Tech Theme
+   ============================================================ */
+
+:root {
+  --background: 222 47% 6%;        /* gray-950 equivalent */
+  --foreground: 213 31% 91%;       /* light gray text */
+
+  --card: 222 47% 8%;
+  --card-foreground: 213 31% 91%;
+
+  --popover: 222 47% 8%;
+  --popover-foreground: 213 31% 91%;
+
+  --primary: 234 89% 74%;           /* indigo-400 */
+  --primary-foreground: 222 47% 6%;
+
+  --secondary: 222 47% 11%;
+  --secondary-foreground: 213 31% 91%;
+
+  --muted: 223 47% 11%;
+  --muted-foreground: 215 20% 55%;
+
+  --accent: 234 89% 60%;            /* indigo-500 */
+  --accent-foreground: 222 47% 6%;
+
+  --destructive: 0 63% 58%;         /* red */
+  --destructive-foreground: 222 47% 6%;
+
+  --border: 222 47% 14%;
+  --input: 222 47% 11%;
+  --ring: 234 89% 60%;
+
+  --radius: 0.625rem;
+
+  /* Chart colors */
+  --chart-1: 234 89% 74%;           /* indigo */
+  --chart-2: 162 72% 46%;           /* emerald */
+  --chart-3: 190 95% 57%;           /* cyan */
+  --chart-4: 43 96% 56%;            /* amber */
+  --chart-5: 0 63% 58%;             /* red */
+
+  /* Semantic colors */
+  --color-critical: 0 63% 58%;
+  --color-warning: 38 92% 50%;
+  --color-info: 214 100% 61%;
+  --color-success: 142 71% 45%;
+}
+
+/* Force dark mode — FamilyPulse is dark-only */
+html {
+  color-scheme: dark;
+}
+
+/* ============================================================
+   BASE RESET & TYPOGRAPHY
+   ============================================================ */
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-gray-950 text-gray-100;
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight text-gray-50;
+  }
+
+  p {
+    @apply text-gray-300 leading-relaxed;
+  }
+
+  a {
+    @apply text-indigo-400 hover:text-indigo-300 transition-colors;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-700 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-600;
+  }
+
+  /* Focus ring */
+  :focus-visible {
+    @apply outline-none ring-2 ring-indigo-500 ring-offset-2 ring-offset-gray-950;
+  }
+}
+
+/* ============================================================
+   COMPONENT UTILITIES
+   ============================================================ */
+
+@layer components {
+  /* Premium card base */
+  .card-dark {
+    @apply bg-gray-900 border border-gray-800 rounded-xl shadow-card;
+  }
+
+  .card-dark:hover {
+    @apply border-gray-700 shadow-card-hover transition-all duration-200;
+  }
+
+  /* Gradient border effect for highlighted cards */
+  .card-gradient-border {
+    position: relative;
+    background: theme(colors.gray.900);
+    border-radius: theme(borderRadius.xl);
+  }
+
+  .card-gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(16, 185, 129, 0.2));
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Metric value display */
+  .metric-value {
+    @apply text-2xl font-bold tabular-nums tracking-tight text-gray-50;
+  }
+
+  .metric-unit {
+    @apply text-sm text-gray-500 font-normal ml-1;
+  }
+
+  /* Status dot */
+  .status-dot {
+    @apply w-2 h-2 rounded-full flex-shrink-0;
+  }
+
+  /* Member avatar pill */
+  .member-pill {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+
+  /* Section header */
+  .section-header {
+    @apply text-xs uppercase tracking-widest text-gray-500 font-semibold mb-4;
+  }
+
+  /* Shimmer loading state */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      theme(colors.gray.800) 25%,
+      theme(colors.gray.700) 50%,
+      theme(colors.gray.800) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Glow effects */
+  .glow-indigo {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.25),
+                0 0 40px rgba(99, 102, 241, 0.1);
+  }
+
+  .glow-emerald {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.25),
+                0 0 40px rgba(16, 185, 129, 0.1);
+  }
+
+  .glow-red {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.3),
+                0 0 40px rgba(239, 68, 68, 0.15);
+  }
+
+  .glow-amber {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.25),
+                0 0 40px rgba(245, 158, 11, 0.1);
+  }
+
+  /* Chat bubble */
+  .chat-bubble-user {
+    @apply bg-indigo-600 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 max-w-[80%] ml-auto;
+  }
+
+  .chat-bubble-assistant {
+    @apply bg-gray-800 text-gray-100 rounded-2xl rounded-tl-sm px-4 py-2.5 max-w-[85%];
+  }
+
+  /* Typing indicator */
+  .typing-dot {
+    @apply w-2 h-2 bg-gray-500 rounded-full;
+    animation: typing-bounce 1.4s infinite ease-in-out;
+  }
+
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes typing-bounce {
+  0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+  40% { transform: scale(1.1); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 5px rgba(99, 102, 241, 0.2); }
+  50% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.5); }
+}
+
+/* ============================================================
+   RECHARTS OVERRIDES
+   ============================================================ */
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(75, 85, 99, 0.3); /* gray-600 30% */
+}
+
+.recharts-text {
+  fill: rgb(107, 114, 128); /* gray-500 */
+  font-size: 11px;
+}
+
+.recharts-tooltip-wrapper {
+  outline: none;
+}
+
+.recharts-default-tooltip {
+  background-color: rgb(17, 24, 39) !important; /* gray-900 */
+  border: 1px solid rgb(55, 65, 81) !important; /* gray-700 */
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+.recharts-tooltip-label {
+  color: rgb(156, 163, 175) !important; /* gray-400 */
+  font-size: 12px !important;
+}
+
+.recharts-tooltip-item {
+  color: rgb(229, 231, 235) !important; /* gray-200 */
+  font-size: 13px !important;
+}
