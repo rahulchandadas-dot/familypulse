@@ -543,7 +543,7 @@ export async function generateRecommendations(
     )
 
     // Build rich member snapshots for affected members
-    const memberSnapshots: MemberDataSnapshot[] = candidate.affected_member_ids
+    const memberSnapshots = (candidate.affected_member_ids
       .map(memberId => {
         const fullName = memberIdToName[memberId]
         if (!fullName) return null
@@ -609,7 +609,7 @@ export async function generateRecommendations(
           flaggedMetrics,
         } satisfies MemberDataSnapshot
       })
-      .filter((s): s is MemberDataSnapshot => s !== null)
+      .filter((s): s is NonNullable<typeof s> => s !== null)) as MemberDataSnapshot[]
 
     // Enhance with LLM using rich member data
     const enhanced = await enhanceWithLLM(candidate, memberSnapshots, sources)

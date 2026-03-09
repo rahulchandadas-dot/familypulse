@@ -198,7 +198,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
   try {
     // Step 1: Resolve or create chat session
-    let resolvedSessionId = sessionId
+    let resolvedSessionId: string = sessionId ?? ''
     if (!resolvedSessionId) {
       const { data: newSession, error: sessionErr } = await supabaseAdmin
         .from('chat_sessions')

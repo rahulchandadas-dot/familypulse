@@ -316,7 +316,9 @@ export function mergeWithDefaultMapping(
     mapping: {
       ...DEFAULT_COLUMN_MAP,
       ...Object.fromEntries(
-        Object.entries(overrides).map(([k, v]) => [normalizeColumnName(k), v])
+        Object.entries(overrides)
+          .filter((entry): entry is [string, string] => entry[1] !== undefined)
+          .map(([k, v]) => [normalizeColumnName(k), v])
       ),
     },
   }

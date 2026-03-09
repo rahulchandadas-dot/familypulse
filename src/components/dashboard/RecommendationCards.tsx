@@ -19,7 +19,6 @@ interface RecommendationCardsProps {
 const ACTION_ICONS: Record<ActionType, React.FC<{ className?: string }>> = {
   activity: ({ className }) => <Zap className={className} />,
   sleep: ({ className }) => <Moon className={className} />,
-  heart: ({ className }) => <Heart className={className} />,
   nutrition: ({ className }) => <Brain className={className} />,
   stress: ({ className }) => <Brain className={className} />,
   social: ({ className }) => <Users className={className} />,
@@ -28,7 +27,6 @@ const ACTION_ICONS: Record<ActionType, React.FC<{ className?: string }>> = {
 const ACTION_COLORS: Record<ActionType, string> = {
   activity: 'text-emerald-400',
   sleep: 'text-violet-400',
-  heart: 'text-red-400',
   nutrition: 'text-amber-400',
   stress: 'text-blue-400',
   social: 'text-pink-400',
