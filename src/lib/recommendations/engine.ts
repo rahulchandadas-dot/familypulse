@@ -749,7 +749,7 @@ export async function runRecommendationPipeline(
       if (!observationsByMember[obs.member_id]) {
         observationsByMember[obs.member_id] = []
       }
-      observationsByMember[obs.member_id].push(obs)
+      observationsByMember[obs.member_id]!.push(obs)
     }
 
     // Run detection
